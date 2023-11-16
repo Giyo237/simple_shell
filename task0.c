@@ -1,5 +1,5 @@
 #include <unistd.h>
-#include "shell.h"
+void display(char *c);
 /**
  * display - function that displays a welcome mesage
  * @c: our character variable
