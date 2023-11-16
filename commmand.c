@@ -10,6 +10,7 @@ char **parse(char *command)
 	int position = 0;
 	char **arguments = malloc(bufsize * sizeof(char *));
 	char *arg;
+	char **ptr;
 
 	if (!arguments)
 	{
@@ -25,12 +26,13 @@ char **parse(char *command)
 		if (position >= bufsize)
 		{
 			bufsize += BUFFER_SIZE;
-			arguments = realloc(arguments, bufsize * sizeof(char *));
-			if (!arguments)
+			ptr = realloc(arguments, bufsize * sizeof(char *));
+			if (!ptr)
 			{
 				perror("realloc");
 				exit(EXIT_FAILURE);
 			}
+			arguments = ptr;
 		}
 
 		arg = strtok(NULL, TOKEN_DELIMITERS);

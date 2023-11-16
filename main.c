@@ -27,8 +27,8 @@ int main(void)
 
 	args = parse(command);
 	executeCommand(args);
-
 	free(args);
 	}
+
 	return (0);
 }
