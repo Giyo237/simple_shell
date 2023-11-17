@@ -9,7 +9,7 @@
 #define BUFFER_SIZE 1024
 #define TOKEN_DELIMITERS " \t\n\r\a\"\'`\\*&#"
 
-
+void cleanit(char **arguments);
 char **parse(char *command);
 int executeCommand(char **args);
 

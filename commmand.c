@@ -38,5 +38,7 @@ char **parse(char *command)
 		arg = strtok(NULL, TOKEN_DELIMITERS);
 	}
 	arguments[position] = NULL;
+	free(ptr);
+	free(arguments);
 	return (arguments);
 }
