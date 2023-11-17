@@ -6,5 +6,6 @@
 #include <unistd.h>
 
 void execmd(char **argv);
+void tokenize(char *command, char **arg, int *numtoken);
 
 #endif

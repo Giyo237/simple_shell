@@ -3,43 +3,58 @@
   * main - main function
   * Return: 0
   */
-int main(void)
+int main (void)
 {
-	size_t buf = 0;
-	char **args;
 	char *command = NULL;
+	char *copy = NULL;
+	size_t i = 0;
+	ssize_t read;
+	int numtoken = 0, j = 0;
 
-	while (1)
-	{
+
+while (1)
+{
 	write(STDOUT_FILENO, "$: ", 2);
-	if (getline(&command, &buf, stdin) == -1)
+	read = getline(&command, &i, stdin);
+	copy = malloc(sizeof(char) * read + 1);
+	if (copy == NULL)
 	{
-		perror("error");
-		exit(EXIT_FAILURE);
-	}
-	command[strspn(command, "\n")] = '\0';
-
-	if (strcmp(command, "exit") == 0)
-	{
-		break;
-
+		perror("hsh: memey allocation failed");
+		return (-1);
 	}
 
-	args = parse(command);
-	if (isvalid(args))
+	strcpy(copy, command);
+
+	if (read == -1)
 	{
-		executeCommand(args);
+		printf("exiting shell...\n");
+		return (-1);
 	}
 	else
 	{
-		write(STDOUT_FILENO, "invalid command: ", 17);
-		write(STDOUT_FILENO, args[0], strlen(args[0]));
-		write(STDOUT_FILENO, "\n", 1);
-	}
-	free(args);
+		char **argv = malloc(sizeof(char *) * (numtoken +1));
+
+		if (argv == NULL)
+		{
+			perror("hsh:memory allocation failed");
+			return (-1);
+		}
+
+		tokenize(command, argv, &numtoken);
+		argv[numtoken] = NULL;
+
+		execmd(argv);
+
+		for (j = 0; j < numtoken; j++)
+		{
+			free(argv[j]);
+		}
+		free(argv);
 	}
 
-	free(command);
+		free(command);
+		free(copy);
+}
 
 	return (0);
 }
