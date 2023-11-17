@@ -1,39 +1,17 @@
 #include "main.h"
-/**
-  * executeCommand - handles the execution of the arg
-  *@args: arguments
-  * Return: stauts
-  */
-int executeCommand(char **args)
-{
-	char *com = NULL;
-	pid_t pid = 0;
-	int status = 0;
 
+void execmd(char **argv){
+    char *command = NULL;
 
-	if (args)
-	{
+    if (argv){
+        /* get the command */
+        command = argv[0];
 
-		com = args[0];
-		pid = fork();
-		if (pid < 0)
-		{
-			perror("error");
-			exit(EXIT_FAILURE);
-		}
-		if (pid == 0)
-		{
-			if (execve(com, args, NULL) == -1)
-			{
-				perror("failed");
-				exit(EXIT_FAILURE);
-			}
-		}
-		else
-		{
-			wait(&status);
-		}
-	}
-	free(args);
-	return (status);
+        /* execute the command with execve */
+        if (execve(command, argv, NULL) == -1){
+            perror("Error:");
+        };
+    }
+
 }
+
