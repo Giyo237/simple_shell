@@ -1,4 +1,4 @@
-#include "shell.h"
+#include "main.h"
 /**
   * main - main function
   * Return: 0
@@ -17,9 +17,9 @@ int main(void)
 		perror("getline error");
 		exit(EXIT_FAILURE);
 	}
-	command[strcspn(command, "\n")] = '\0';
+	command[customstrspn(command, "\n")] = '\0';
 
-	if (strcmp(command, "exit") == 0)
+	if (customstrcmp(command, "exit") == 0)
 	{
 		break;
 

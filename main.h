@@ -12,5 +12,7 @@
 void cleanit(char **arguments);
 char **parse(char *command);
 int executeCommand(char **args);
+size_t customstrspn(const char *s, const char *accept);
+int customstrcmp(const char *s1, const char *s2);
 
 #endif

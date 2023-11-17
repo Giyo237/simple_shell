@@ -34,6 +34,6 @@ int executeCommand(char **args)
 			wait(&status);
 		}
 	}
-/*	free(args);*/
+	free(args);
 	return (status);
 }
