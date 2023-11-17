@@ -1,4 +1,4 @@
-#include "shell.h"
+#include "main.h"
 /**
   *parse - function that validates the arg
   *@command: command by user
